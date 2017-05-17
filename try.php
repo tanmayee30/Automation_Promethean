@@ -2,7 +2,7 @@
 <body>
 <head><meta http-equiv="refresh" content="5" > </head>
 <?php
-
+  
 $username="root";
 $password="root";
 $database="temp_database";
