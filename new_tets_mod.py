@@ -16,10 +16,10 @@ client.connect()
 response=client.read_holding_registers(0004,6,unit=1)
 
 print response.registers[0:]
-print "TSS Temp:",response.registers[0]/10.0
+print "Battery Temp:",response.registers[0]/10.0
 print "Milk Temp:",response.registers[1]/10.0
 print "Aux. Temp:",response.registers[2]/10.0
-print "Batt. Voltage:",response.registers[3]/1.0
+#print "Batt. Voltage:",response.registers[3]/1.0
 print "Com Curr:", response.registers[5]/1.0
 
 
