@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<head>
-
+<head><body>
+Welcome serial no is:<?php echo $_POST["serialNo"];?><br>
+Your FAN no is: <?php echo $_POST["FAN"]; ?></body>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 
   <!-- These are for Date Picker -->
@@ -83,7 +84,6 @@
   			        	}
   }	//exportTableToCSV() ends here
   </script>
-
 <style>
 #dataTbl td, th
 {
@@ -95,9 +95,12 @@
 }
 </style>
 
+<?php "<script>document.writeln(date);</script>" ?>
 
 </head>
+
 <?php
+
 $username="root";
 $password="root";
 $database="temp_database";
