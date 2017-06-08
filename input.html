@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<style>
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    text: start test;
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 4px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+     text-align: center;
+}
+
+div { 
+    background-color: #45a049;
+    margin:0 auto;
+    width:50%;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+</style>
+<body>
+<h2 style="text-align:center">Promethean Automation testbed</h2>
+<div> 
+<form action="new_working.php" method="post">
+Serial Number: <input type="text" name="serialNo" placeholder="Enter serial no.." required><br>
+FAN number: <input type="text" name="FAN" placeholder="Enter fan no.."><br>
+<input type="submit" name="Start Test">
+</form>
+</div>
+</body>
+</html>
