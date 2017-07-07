@@ -4,7 +4,7 @@ import serial
 from pymodbus.pdu import ModbusRequest
 from pymodbus.client.sync import ModbusSerialClient as ModbusClient
 from pymodbus.transaction import ModbusRtuFramer
-
+import sys
 import os
 #from datetime import datetime
 import datetime
@@ -15,6 +15,7 @@ from time import strftime
 import time                             # time used for delays
 import httplib, urllib                  # http and url libs used for HTTP $
 import socket
+import json
 
 server = "data.sparkfun.com"            # base URL of your feed
 publicKey = "GEGLXdO3dnHDKar5x2xW"
@@ -31,6 +32,12 @@ cur = db.cursor()
 
 response=client.read_holding_registers(0004,6,unit=1)
 
+with open('/var/www/html/AutomationProject/file2.json')as f:
+    data = json.loads(f.read())
+
+print data['serial']
+serialNum = data['serial']
+
 bat_temp = response.registers[0]/10.0
 milk_temp = response.registers[1]/10.0
 aux_temp = response.registers[2]/10.0
@@ -42,8 +49,8 @@ while True:
     Ambient = aux_temp;
     Battery = bat_temp;
     Comp = comp_curr;
-    HP = 1;
-    LP = 1;
+    HP = 0;
+    LP = 0;
     print Milk
     print Ambient
     print Battery
@@ -55,8 +62,8 @@ while True:
 	
     print datetimeWrite
     print time_
-    if Milk<=25 or Battery==-10:
-        sql = ("""INSERT INTO tempLog(date,time, Bat_temp, Milk_temp, Aux_temp, Comp_curr,HP,LP) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)""",(datetimeWrite,time_,Battery,Milk,Ambient,Comp,HP,LP))  
+    if Milk>=25 or Battery==-10:
+        sql = ("""INSERT INTO tempLog(date,time,SerialNo, Bat_temp, Milk_temp, Aux_temp, Comp_curr,HP,LP) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)""",(datetimeWrite,time_,serialNum,Battery,Milk,Ambient,Comp,HP,LP))  
     try:
         print "Writing to database..."
         # Execute the SQL command
