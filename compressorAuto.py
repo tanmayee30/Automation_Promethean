@@ -24,8 +24,6 @@ gpio.setmode(gpio.BOARD)
 gpio.setup(36,gpio.OUT)
 gpio.output(36,0)
 
-HP =0
-LP=0
 #############################################################################################
 
 server = "data.sparkfun.com"        					# base URL of your feed
@@ -62,6 +60,8 @@ print milk_temp
 aux_temp = response.registers[2]/10.0
 comp_curr = response.registers[5]/10.0
 
+HP=0
+LP=0
 fault = responseFault.registers[12]
 print "Fault register reading: ",fault
 if fault == 4:
@@ -85,8 +85,8 @@ while True:
     print "Aux Temp: ",Ambient
     print "Battery Temp: ",Battery
     print "Comp curr: ",Comp
-    print "HP: ",HP
-    print "LP: ",LP
+    print "HP in while : ",HP
+    print "LP in while : ",LP
     datetimeWrite = (time.strftime("%Y-%m-%d "))
     time_ = (time.strftime("%H:%M:%S"))
     #time_ =  "%s-%s-%s" % (datetime.now().hour,datetime.now().minute, datetime.now().second)  
