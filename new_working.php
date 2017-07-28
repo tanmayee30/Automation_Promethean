@@ -2,22 +2,26 @@
 <html lang="en">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <head><body>
-Download: <input type="text" name="serialNo" placeholder="Enter serial number.." <br>
+<b align="left"><th>Serial no:</b></th><br>
+
+<form action="excelReport.php" method="POST">
+Serial Number:<input type="text" name="serialNo">
+<input type="Submit" Name = "Download">
+</form>
+
+<form method="get" action="input.html">
+<button type="submit" style="float:right;background-color:#4CAF50;border:none;color:white;padding:15px 40px;cursor:pointer;font-weight:bold;">New Test</button></form>
 <h3><center>Compressor Test Log</center></h3>
 
-<b><th>Serial no:</b></th>
+
 <?php
 $serial = $_POST["serialNo"];
-
-//$serial = 9;
 echo $serial;
-
 $fp = fopen("file2.json","w")or die("unable to open file");
 $input = $serial;
 
 $posts=array('serial'=>$input);
     $response=$posts;
-//    $fp = fopen('file2.json','w');
     fwrite($fp,json_encode($response));
     fclose($fp);
 ?><br>
@@ -42,7 +46,8 @@ mysql_connect(localhost,$username,$password);
 @mysql_select_db($database) or die( "Unable to select database");
 
 //$query="SELECT * FROM tempLog ORDER BY Date DESC,Time DESC,SerialNo DESC,Bat_temp DESC, Milk_temp DESC,Aux_temp DESC,Comp_curr DESC, HP DESC, LP DESC temp_database.tempLog WHERE SerialNo='$input'" ;
-$query="SELECT * FROM tempLog WHERE SerialNo=$serial ORDER BY Time DESC";
+//$query="SELECT * FROM tempLog WHERE SerialNo='".$serial."' ORDER BY Time DESC";
+$query="SELECT * FROM tempLog WHERE SerialNo='".$serial."'";
 $result=mysql_query($query);
 $num=mysql_numrows($result);
 mysql_close();
@@ -55,8 +60,8 @@ $tempValues = array();
       <th><font face="Arial, Helvetica, sans-serif">Date</font></th>
       <th><font face="Arial, Helvetica, sans-serif">Time</font></th>
       <th><font face="Arial, Helvetica, sans-serif">Serial No</font></th>
-      <th><font face="Arial, Helvetica, sans-serif">Battery Temp</font></th>
-      <th><font face="Arial, Helvetica, sans-serif">Milk Temp</font></th>
+      <th><font face="Arial, Helvetica, sans-serif">Brine out</font></th>
+      <th><font face="Arial, Helvetica, sans-serif">Brine in</font></th>
       <th><font face="Arial, Helvetica, sans-serif">Ambient Temp</font></th>
       <th><font face="Arial, Helvetica, sans-serif">Comp Current</font></th>
       <th><font face="Arial, Helvetica. sans-serif">HP</font></th>
