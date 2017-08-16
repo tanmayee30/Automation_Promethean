@@ -91,11 +91,24 @@ while True:
     time_ = (time.strftime("%H:%M:%S"))
     #time_ =  "%s-%s-%s" % (datetime.now().hour,datetime.now().minute, datetime.now().second)  
     #datestamp =  "%s-%s-%s" % (datetime.now().year,datetime.now().month, datetime.now().day)
-	
+
+
+    if 24.8 <= Milk <=25.2:
+        print "In milk"
+        gpio.output(36,1)
+        time.sleep(3)
+        gpio.output(36,0)
+    elif Battery == -10.0:
+        print "In battery"
+        gpio.output(36,1)
+        time.sleep(6)
+        gpio.output(36,0)
+    else:
+        print "Out of buzzer condition"
     print datetimeWrite
     print time_
-    if Milk<=25.0 or Battery==-10.0:
-        sql = ("""INSERT INTO tempLog(date,time,SerialNo, Bat_temp, Milk_temp, Aux_temp, Comp_curr,HP,LP) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)""",(datetimeWrite,time_,serialNum,Battery,Milk,Ambient,Comp,HP,LP))  
+    if Milk<=29.0 or Battery==-10.0:
+        sql = ("""INSERT INTO compData(date,time,SerialNo, Bat_temp, Milk_temp, Aux_temp, Comp_curr,HP,LP) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)""",(datetimeWrite,time_,serialNum,Battery,Milk,Ambient,Comp,HP,LP))  
     try:
         print "Writing to database..."
         # Execute the SQL command
@@ -128,7 +141,7 @@ while True:
 	#print r.status, r.reason
 
 ################################# Condition check for Buzzer ######################
-	if 24.8 <= Milk <=25.0:
+	if 24.8 <= Milk <=25.2:
                 print "In milk"
                 gpio.output(36,1)
                 time.sleep(3)
